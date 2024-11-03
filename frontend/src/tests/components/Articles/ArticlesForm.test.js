@@ -1,8 +1,7 @@
 import { render, waitFor, fireEvent, screen } from "@testing-library/react";
-import UCSBDateForm from "main/components/Articles/ArticlesForm";
-import { articlesFixtures, ucsbDatesFixtures } from "fixtures/articlesFixtures";
-import { BrowserRouter as Router } from "react-router-dom";
 import ArticlesForm from "main/components/Articles/ArticlesForm";
+import { articlesFixtures } from "fixtures/articlesFixtures";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const mockedNavigate = jest.fn();
 
@@ -16,7 +15,7 @@ describe("ArticlesForm tests", () => {
     render(
       <Router>
         <ArticlesForm />
-      </Router>
+      </Router>,
     );
     // await screen.findByText(/Quarter YYYYQ/);
     await screen.findByText(/Create/);
@@ -26,7 +25,7 @@ describe("ArticlesForm tests", () => {
     render(
       <Router>
         <ArticlesForm initialContents={articlesFixtures.oneArticle} />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId(/ArticlesForm-id/);
     expect(screen.getByText(/Id/)).toBeInTheDocument();
@@ -37,7 +36,7 @@ describe("ArticlesForm tests", () => {
     render(
       <Router>
         <ArticlesForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("ArticlesForm-title");
     const titleField = screen.getByTestId("ArticlesForm-title");
@@ -55,7 +54,7 @@ describe("ArticlesForm tests", () => {
     render(
       <Router>
         <ArticlesForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("ArticlesForm-submit");
     const submitButton = screen.getByTestId("ArticlesForm-submit");
@@ -75,7 +74,7 @@ describe("ArticlesForm tests", () => {
     render(
       <Router>
         <ArticlesForm submitAction={mockSubmitAction} />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("ArticlesForm-title");
 
@@ -101,7 +100,7 @@ describe("ArticlesForm tests", () => {
     //   screen.queryByText(/QuarterYYYYQ must be in the format YYYYQ/)
     // ).not.toBeInTheDocument();
     expect(
-      screen.queryByText(/dateAdded must be in ISO format/)
+      screen.queryByText(/dateAdded must be in ISO format/),
     ).not.toBeInTheDocument();
   });
 
@@ -109,7 +108,7 @@ describe("ArticlesForm tests", () => {
     render(
       <Router>
         <ArticlesForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("ArticlesForm-cancel");
     const cancelButton = screen.getByTestId("ArticlesForm-cancel");
