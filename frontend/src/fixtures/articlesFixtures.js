@@ -9,7 +9,7 @@ const articlesFixtures = {
   },
   threeArticles: [
     {
-      id: 2,
+      id: 1,
       title: "20222",
       url: "exampletwo.com",
       explanation: "this is the second article",
@@ -17,7 +17,7 @@ const articlesFixtures = {
       dateAdded: "2023-02-02T12:00:00",
     },
     {
-      id: 3,
+      id: 2,
       title: "20223",
       url: "examplethree.com",
       explanation: "this is the third article",
@@ -25,7 +25,7 @@ const articlesFixtures = {
       dateAdded: "2024-03-02T12:00:00",
     },
     {
-      id: 4,
+      id: 3,
       title: "20224",
       url: "examplefour.com",
       explanation: "this is the fourth article",
