@@ -14,7 +14,7 @@ const articlesFixtures = {
       url: "exampletwo.com",
       explanation: "this is the second article",
       email: "usertwotest@gmail.com",
-      dateAdded: "2023-02-02T12:00:00",
+      dateAdded: "2023-02-02T12:00:01",
     },
     {
       id: 3,
