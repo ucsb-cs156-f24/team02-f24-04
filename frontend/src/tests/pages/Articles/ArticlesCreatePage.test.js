@@ -64,10 +64,10 @@ describe("ArticlesCreatePage tests", () => {
     const queryClient = new QueryClient();
     const sbarticle = {
       id: 17,
-      title: "wow",
-      url: "something.com",
-      explanation: "this is an expl.",
-      email: "creatingtest@gmail.com",
+      title: "20221",
+      url: "Groundhog Day",
+      explanation: "Groundhog Day",
+      email: "Groundhog Day",
       dateAdded: "2022-02-02T00:00",
     };
 
@@ -90,7 +90,7 @@ describe("ArticlesCreatePage tests", () => {
     const explanationField = screen.getByTestId("ArticlesForm-explanation");
     const emailField = screen.getByTestId("ArticlesForm-email");
     const dateAddedField = screen.getByTestId("ArticlesForm-dateAdded");
-    const submitButton = screen.getByTestId("UCSBDateForm-submit");
+    const submitButton = screen.getByTestId("ArticlesForm-submit");
 
     fireEvent.change(titleField, { target: { value: "20221" } });
     fireEvent.change(urlField, { target: { value: "Groundhog Day" } });
@@ -107,15 +107,15 @@ describe("ArticlesCreatePage tests", () => {
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-      titleField: "20221",
-      urlField: "Groundhog Day",
-      explanationField: "Groundhod Day",
-      emailField: "Groundhog Day",
-      dateAddedField: "2022-02-02T00:00",
+      title: "20221",
+      url: "Groundhog Day",
+      explanation: "Groundhog Day",
+      email: "Groundhog Day",
+      dateAdded: "2022-02-02T00:00",
     });
 
     expect(mockToast).toBeCalledWith(
-      "New sbarticle Created - id: 17 title: Groundhog Day"
+      "New article Created - id: 17 title: 20221"
     );
     expect(mockNavigate).toBeCalledWith({ to: "/articles" });
   });
