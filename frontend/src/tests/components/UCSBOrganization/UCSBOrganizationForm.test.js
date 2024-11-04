@@ -41,7 +41,9 @@ describe("UCSBOrganizationForm tests", () => {
 
     expect(screen.getByTestId(`${testId}-inactive`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-orgCode`)).toBeInTheDocument();
-    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toBeInTheDocument();
+    expect(
+      screen.getByTestId(`${testId}-orgTranslationShort`),
+    ).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-orgTranslation`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-submit`)).toBeInTheDocument();
     expect(screen.getByTestId(`${testId}-cancel`)).toBeInTheDocument();
@@ -51,7 +53,9 @@ describe("UCSBOrganizationForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <UCSBOrganizationForm initialContents={ucsbOrganizationFixtures.oneOrg[0]} />
+          <UCSBOrganizationForm
+            initialContents={ucsbOrganizationFixtures.oneOrg[0]}
+          />
         </Router>
       </QueryClientProvider>,
     );
@@ -64,8 +68,12 @@ describe("UCSBOrganizationForm tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-orgCode`)).toHaveValue("csu");
-    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toHaveValue("CSU");
-    expect(screen.getByTestId(`${testId}-orgTranslation`)).toHaveValue("UCSB Chinese Student Union");
+    expect(screen.getByTestId(`${testId}-orgTranslationShort`)).toHaveValue(
+      "CSU",
+    );
+    expect(screen.getByTestId(`${testId}-orgTranslation`)).toHaveValue(
+      "UCSB Chinese Student Union",
+    );
     expect(screen.getByTestId(`${testId}-inactive`)).toHaveValue("false");
   });
 
@@ -97,8 +105,12 @@ describe("UCSBOrganizationForm tests", () => {
     fireEvent.click(submitButton);
 
     await screen.findByText(/Organization Code is required./);
-    expect(screen.getByText(/Organization Translation Short is required./)).toBeInTheDocument();
-    expect(screen.getByText(/Organization Translation is required./)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Organization Translation Short is required./),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Organization Translation is required./),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Status is required./)).toBeInTheDocument();
   });
 
