@@ -1,6 +1,6 @@
 import React from "react";
 import UCSBDiningCommonsMenuItemForm from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemForm";
-import { UCSBDiningCommonsMenuItemsFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 
 export default {
   title: "components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemForm",
@@ -24,7 +24,7 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-  initialContents: UCSBDiningCommonsMenuItemsFixtures.oneDate,
+  initialContents: ucsbDiningCommonsMenuItemFixtures.oneDiningCommonMenuItem,
   buttonLabel: "Update",
   submitAction: (data) => {
     console.log("Submit was clicked with data: ", data);
