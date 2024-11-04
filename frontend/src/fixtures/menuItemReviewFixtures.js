@@ -17,7 +17,7 @@ const menuItemReviewFixtures = {
       comments: "I love the Apple Pie",
     },
     {
-      id: 1,
+      id: 2,
       itemId: 3,
       reviewerEmail: "ldelplaya@ucsb.edu",
       stars: 0,
@@ -25,7 +25,7 @@ const menuItemReviewFixtures = {
       comments: "I hate the Pumpkin Pie",
     },
     {
-      id: 1,
+      id: 3,
       itemId: 4,
       reviewerEmail: "test@ucsb.edu",
       stars: 3,
