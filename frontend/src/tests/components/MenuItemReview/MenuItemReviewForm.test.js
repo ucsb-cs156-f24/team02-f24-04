@@ -24,7 +24,9 @@ describe("MenuItemReviewForm tests", () => {
   test("renders correctly when passing in a MenuItemReview", async () => {
     render(
       <Router>
-        <MenuItemReviewForm initialContents={menuItemReviewFixtures.oneReview} />
+        <MenuItemReviewForm
+          initialContents={menuItemReviewFixtures.oneReview}
+        />
       </Router>,
     );
     await screen.findByTestId(/MenuItemReviewForm-id/);
@@ -40,7 +42,9 @@ describe("MenuItemReviewForm tests", () => {
     );
     await screen.findByTestId("MenuItemReviewForm-itemId");
     const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-    const dateReviwedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
+    const dateReviwedField = screen.getByTestId(
+      "MenuItemReviewForm-dateReviewed",
+    );
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
     fireEvent.change(itemIdField, { target: { value: "bad-input" } });
@@ -79,14 +83,20 @@ describe("MenuItemReviewForm tests", () => {
     await screen.findByTestId("MenuItemReviewForm-itemId");
 
     const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-    const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+    const reviewerEmailField = screen.getByTestId(
+      "MenuItemReviewForm-reviewerEmail",
+    );
     const starsField = screen.getByTestId("MenuItemReviewForm-stars");
-    const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
+    const dateReviewedField = screen.getByTestId(
+      "MenuItemReviewForm-dateReviewed",
+    );
     const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
     const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
     fireEvent.change(itemIdField, { target: { value: "20221" } });
-    fireEvent.change(reviewerEmailField, { target: { value: "test@example.com" } });
+    fireEvent.change(reviewerEmailField, {
+      target: { value: "test@example.com" },
+    });
     fireEvent.change(starsField, { target: { value: "5" } });
     // fireEvent.change(dateReviewedField, { target: { value: "20221" } });
     fireEvent.change(commentsField, { target: { value: "text" } });
