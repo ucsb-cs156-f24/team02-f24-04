@@ -19,6 +19,10 @@ import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
 import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
 
+import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
+import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
+import MenuItemReviewEditPage from "main/pages/MenuItemReview/MenuItemReviewEditPage";
+
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -117,6 +121,30 @@ function App() {
               exact
               path="/articles/create"
               element={<ArticlesCreatePage />}
+            />
+          </>
+        )}
+
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/menuitemreviews"
+              element={<MenuItemReviewIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/menuitemreviews/edit/:id"
+              element={<MenuItemReviewEditPage />}
+            />
+            <Route
+              exact
+              path="/menuitemreviews/create"
+              element={<MenuItemReviewCreatePage />}
             />
           </>
         )}
