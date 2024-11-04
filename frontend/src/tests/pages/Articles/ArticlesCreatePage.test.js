@@ -52,7 +52,7 @@ describe("ArticlesCreatePage tests", () => {
         <MemoryRouter>
           <ArticlesCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
@@ -78,7 +78,7 @@ describe("ArticlesCreatePage tests", () => {
         <MemoryRouter>
           <ArticlesCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
@@ -115,7 +115,7 @@ describe("ArticlesCreatePage tests", () => {
     });
 
     expect(mockToast).toBeCalledWith(
-      "New article Created - id: 17 title: 20221"
+      "New article Created - id: 17 title: 20221",
     );
     expect(mockNavigate).toBeCalledWith({ to: "/articles" });
   });

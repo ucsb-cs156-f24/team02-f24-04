@@ -19,7 +19,7 @@ export default function ArticlesCreatePage({ storybook = false }) {
 
   const onSuccess = (sbarticle) => {
     toast(
-      `New article Created - id: ${sbarticle.id} title: ${sbarticle.title}`
+      `New article Created - id: ${sbarticle.id} title: ${sbarticle.title}`,
     );
   };
 
@@ -27,7 +27,7 @@ export default function ArticlesCreatePage({ storybook = false }) {
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    ["/api/articles/all"]
+    ["/api/articles/all"],
   );
 
   const { isSuccess } = mutation;
