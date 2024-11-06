@@ -34,7 +34,7 @@ const recommendationRequestFixtures = {
       explanation: "test explanation 3",
       dateRequested: "2024-1-03T00:00:00",
       dateNeeded: "2024-1-03T00:00:00",
-      done: true,
+      done: false,
     },
   ],
 };
