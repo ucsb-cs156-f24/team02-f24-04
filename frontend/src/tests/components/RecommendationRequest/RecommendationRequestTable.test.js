@@ -1,5 +1,4 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { ucsbDatesFixtures } from "fixtures/ucsbDatesFixtures";
 import RecommendationRequestTable from "main/components/RecommendationRequest/RecommendationRequestTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
