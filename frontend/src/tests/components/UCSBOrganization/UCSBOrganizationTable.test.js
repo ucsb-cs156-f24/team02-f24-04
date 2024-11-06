@@ -6,12 +6,17 @@ import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
+import { toast } from "react-toastify";
 
 const mockedNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useNavigate: () => mockedNavigate,
+}));
+
+jest.mock("react-toastify", () => ({
+  toast: jest.fn(),
 }));
 
 describe("UCSBOrganizationTable tests", () => {
@@ -265,5 +270,12 @@ describe("UCSBOrganizationTable tests", () => {
     // assert - check that the delete function was called
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params.orgCode).toBe("kasa");
+
+    // assert - check that the toast was called with the correct message from response
+    await waitFor(() => {
+      expect(toast).toHaveBeenCalledWith(
+        { message: "Organization deleted successfully" }.message,
+      );
+    });
   });
 });

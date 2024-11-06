@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
 
-export function onDeleteSuccess(message) {
-  console.log(message);
+export function onDeleteSuccess(response) {
+  const message =
+    response?.data?.message || "Organization deleted successfully";
   toast(message);
 }
 

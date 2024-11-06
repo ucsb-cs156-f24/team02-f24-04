@@ -51,7 +51,7 @@ export default function OrganizationTable({
       Header: "Inactive",
       accessor: "inactive",
       // for boolean
-    //   Cell: ({ cell }) => <span>{cell.value ? "True" : "False"}</span>,
+      //   Cell: ({ cell }) => <span>{cell.value ? "True" : "False"}</span>,
       Cell: ({ value }) => (value ? "True" : "False"),
     },
   ];
