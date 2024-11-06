@@ -4,7 +4,9 @@ import { Navigate } from "react-router-dom";
 import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
-export default function UCSBDiningCommonsMenuItemCreatePage({ storybook = false }) {
+export default function UCSBDiningCommonsMenuItemCreatePage({
+  storybook = false,
+}) {
   // Stryker disable all : UCSBDiningCommonsMenuItem for future implementation
   const objectToAxiosParams = (menuItem) => ({
     url: "/api/ucsbdiningcommonsmenuitem/post",
@@ -36,7 +38,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({ storybook = false 
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/diningcommonsmenuitem" />;
+    return <Navigate to="/diningcommonsmenuitems" />;
   }
 
   return (

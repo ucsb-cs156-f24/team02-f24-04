@@ -1,4 +1,5 @@
-import { render, waitFor, fireEvent, screen } from "@testing-library/react";import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
+import { render, waitFor, fireEvent, screen } from "@testing-library/react";
+import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
@@ -69,8 +70,10 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
       name: "pasta",
       station: "entre",
     };
-    
-    axiosMock.onPost("/api/ucsbdiningcommonsmenuitem/post").reply(202,ucsbDiningCommonMenuItem);
+
+    axiosMock
+      .onPost("/api/ucsbdiningcommonsmenuitem/post")
+      .reply(202, ucsbDiningCommonMenuItem);
 
     // act
     render(
@@ -87,10 +90,16 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
       ).toBeInTheDocument();
     });
 
-    const diningCommonsCodeField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode");
+    const diningCommonsCodeField = screen.getByTestId(
+      "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
+    );
     const nameField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
-    const stationField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
-    const submitButton = screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit");
+    const stationField = screen.getByTestId(
+      "UCSBDiningCommonsMenuItemForm-station",
+    );
+    const submitButton = screen.getByTestId(
+      "UCSBDiningCommonsMenuItemForm-submit",
+    );
 
     fireEvent.change(diningCommonsCodeField, { target: { value: "ortega" } });
     fireEvent.change(nameField, { target: { value: "pasta" } });
@@ -103,7 +112,6 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
     await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
     expect(axiosMock.history.post[0].params).toEqual({
-
       diningCommonsCode: "ortega",
       name: "pasta",
       station: "entre",
@@ -112,6 +120,6 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
     expect(mockToast).toBeCalledWith(
       "New ucsbDiningCommonMenuItem Created - id: 17 name: pasta",
     );
-    expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonsmenuitem" });
+    expect(mockNavigate).toBeCalledWith({ to: "/diningcommonsmenuitems" });
   });
 });
