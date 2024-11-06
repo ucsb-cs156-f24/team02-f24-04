@@ -13,7 +13,7 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("HelpRequestForm tests", () => {
-  const renderForm = (props = {}) => 
+  const renderForm = (props = {}) =>
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
@@ -27,10 +27,8 @@ describe("HelpRequestForm tests", () => {
     expect(await screen.findByText(/Create/)).toBeInTheDocument();
   });
 
-
   test("displays error message when Team ID is missing", async () => {
     renderForm();
-
     fireEvent.click(screen.getByText(/Create/));
 
     await waitFor(() => {
@@ -39,129 +37,82 @@ describe("HelpRequestForm tests", () => {
   });
 
   test("renders form without initial contents", () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm />
-        </Router>
-      </QueryClientProvider>
-    );
+    renderForm();
     // Expect form elements without initial content values
   });
-  
+
   test("renders form with initial contents", () => {
-    const initialContents = { id: "123", requesterEmail: "test@ucsb.edu", teamId: "42", /* other fields */ };
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm initialContents={initialContents} />
-        </Router>
-      </QueryClientProvider>
-    );
+    const initialContents = { id: "123", requesterEmail: "test@ucsb.edu", teamId: "42" };
+    renderForm({ initialContents });
     // Expect form elements with initial content values set
   });
-  
+
   test("displays required error for requesterEmail", async () => {
-    render(<HelpRequestForm />);
+    renderForm();
     fireEvent.submit(screen.getByTestId("HelpRequestForm-submit"));
+
     await waitFor(() => {
       expect(screen.getByText("Requester email is required.")).toBeInTheDocument();
     });
   });
 
   test("does not render id field when initialContents is undefined", () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm />
-        </Router>
-      </QueryClientProvider>
-    );
+    renderForm();
     expect(screen.queryByTestId("HelpRequestForm-id")).not.toBeInTheDocument();
   });
-  
+
   test("renders disabled id field when initialContents is provided", () => {
     const initialContents = { id: "123" };
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm initialContents={initialContents} />
-        </Router>
-      </QueryClientProvider>
-    );
+    renderForm({ initialContents });
+    
     const idField = screen.getByTestId("HelpRequestForm-id");
     expect(idField).toBeInTheDocument();
     expect(idField).toBeDisabled();
   });
-  
+
   test("accepts a valid email format", async () => {
-    render(<HelpRequestForm />);
+    renderForm();
     const emailInput = screen.getByTestId("HelpRequestForm-requesterEmail");
     fireEvent.change(emailInput, { target: { value: "valid@example.com" } });
     fireEvent.submit(screen.getByTestId("HelpRequestForm-submit"));
+
     await waitFor(() => {
       expect(screen.queryByText("Invalid email format")).not.toBeInTheDocument();
     });
   });
 
   test("sets defaultValues to empty object when initialContents is undefined", () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm />
-        </Router>
-      </QueryClientProvider>
-    );
+    renderForm();
     expect(screen.queryByTestId("HelpRequestForm-id")).not.toBeInTheDocument();
   });
-  
+
   test("uses initialContents as defaultValues when provided", () => {
     const initialContents = { id: "123", requesterEmail: "test@ucsb.edu" };
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm initialContents={initialContents} />
-        </Router>
-      </QueryClientProvider>
-    );
+    renderForm({ initialContents });
+
     expect(screen.getByTestId("HelpRequestForm-id")).toHaveValue("123");
     expect(screen.getByTestId("HelpRequestForm-requesterEmail")).toHaveValue("test@ucsb.edu");
   });
-  
+
   test("shows required error messages when fields are empty", async () => {
-    render(<HelpRequestForm />);
-    const submitButton = screen.getByTestId("HelpRequestForm-submit");
-    fireEvent.click(submitButton);
-    
+    renderForm();
+    fireEvent.click(screen.getByTestId("HelpRequestForm-submit"));
+
     await waitFor(() => {
       expect(screen.getByText("Requester email is required.")).toBeInTheDocument();
-    });
-    await waitFor(() => {
       expect(screen.getByText("Team ID is required.")).toBeInTheDocument();
-    });
-    await waitFor(() => {
       expect(screen.getByText("Table or Breakout Room is required.")).toBeInTheDocument();
-    });
-    await waitFor(() => {
-    expect(screen.getByText("Request time is required.")).toBeInTheDocument();
-    });
-    await waitFor(() => {
+      expect(screen.getByText("Request time is required.")).toBeInTheDocument();
       expect(screen.getByText("Explanation is required.")).toBeInTheDocument();
     });
-  });  
-  
+  });
+
   test("accepts various valid email formats", async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <HelpRequestForm />
-        </Router>
-      </QueryClientProvider>
-    );
-  
+    renderForm();
+
     const emailInput = screen.getByTestId("HelpRequestForm-requesterEmail");
     const submitButton = screen.getByTestId("HelpRequestForm-submit");
-  
+
     const validEmails = [
       "simple@example.com",
       "very.common@example.com",
@@ -175,23 +126,19 @@ describe("HelpRequestForm tests", () => {
       "user%example.com@example.org",
       "user-@example.org",
     ];
-  
+
     for (const email of validEmails) {
       fireEvent.change(emailInput, { target: { value: email } });
       fireEvent.click(submitButton);
-  
+
       await waitFor(() => {
-        // Check that the error message is NOT present
         expect(screen.queryByText("Invalid email format")).not.toBeInTheDocument();
       });
     }
   });
-  
-  
-  
+
   test("displays error message when Table or Breakout Room is missing", async () => {
     renderForm();
-
     fireEvent.click(screen.getByText(/Create/));
 
     await waitFor(() => {
@@ -201,7 +148,6 @@ describe("HelpRequestForm tests", () => {
 
   test("displays error message when Request Time is missing", async () => {
     renderForm();
-
     fireEvent.click(screen.getByText(/Create/));
 
     await waitFor(() => {
@@ -211,7 +157,6 @@ describe("HelpRequestForm tests", () => {
 
   test("displays error message when Explanation exceeds max length", async () => {
     renderForm();
-
     const explanationInput = screen.getByTestId(`${testIdPrefix}-explanation`);
     fireEvent.change(explanationInput, { target: { value: "a".repeat(501) } });
     fireEvent.click(screen.getByText(/Create/));
@@ -223,8 +168,8 @@ describe("HelpRequestForm tests", () => {
 
   test("toggles Solved checkbox", async () => {
     renderForm();
-
     const solvedCheckbox = screen.getByTestId(`${testIdPrefix}-solved`);
+
     fireEvent.click(solvedCheckbox);
     expect(solvedCheckbox).toBeChecked();
 
@@ -251,9 +196,7 @@ describe("HelpRequestForm tests", () => {
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
     renderForm();
-
-    const cancelButton = screen.getByTestId(`${testIdPrefix}-cancel`);
-    fireEvent.click(cancelButton);
+    fireEvent.click(screen.getByTestId(`${testIdPrefix}-cancel`));
 
     await waitFor(() => {
       expect(mockedNavigate).toHaveBeenCalledWith(-1);

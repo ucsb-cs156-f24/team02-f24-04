@@ -23,7 +23,7 @@ function HelpRequestForm({
         <Form.Group className="mb-3">
           <Form.Label htmlFor="id">Id</Form.Label>
           <Form.Control
-            data-testid={testIdPrefix + "-id"}
+            data-testid={`${testIdPrefix}-id`}
             id="id"
             type="text"
             {...register("id")}
@@ -36,7 +36,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-requesterEmail"}
+          data-testid={`${testIdPrefix}-requesterEmail`}
           id="requesterEmail"
           type="email"
           placeholder="example@ucsb.edu"
@@ -53,7 +53,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="teamId">Team ID</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-teamId"}
+          data-testid={`${testIdPrefix}-teamId`}
           id="teamId"
           type="text"
           placeholder="Enter team ID"
@@ -70,7 +70,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="tableOrBreakoutRoom">Table or Breakout Room</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+          data-testid={`${testIdPrefix}-tableOrBreakoutRoom`}
           id="tableOrBreakoutRoom"
           type="text"
           placeholder="e.g., Table 1, Breakout Room A"
@@ -87,7 +87,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="requestTime">Request Time</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-requestTime"}
+          data-testid={`${testIdPrefix}-requestTime`}
           id="requestTime"
           type="datetime-local"
           isInvalid={Boolean(errors.requestTime)}
@@ -103,7 +103,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-explanation"}
+          data-testid={`${testIdPrefix}-explanation`}
           id="explanation"
           as="textarea"
           rows={3}
@@ -124,7 +124,7 @@ function HelpRequestForm({
 
       <Form.Group className="mb-3">
         <Form.Check
-          data-testid={testIdPrefix + "-solved"}
+          data-testid={`${testIdPrefix}-solved`}
           id="solved"
           label="Solved"
           {...register("solved")}
@@ -132,13 +132,13 @@ function HelpRequestForm({
         />
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit" data-testid={`${testIdPrefix}-submit`}>
         {buttonLabel}
       </Button>
       <Button
         variant="secondary"
         onClick={() => navigate(-1)}
-        data-testid={testIdPrefix + "-cancel"}
+        data-testid={`${testIdPrefix}-cancel`}
       >
         Cancel
       </Button>
