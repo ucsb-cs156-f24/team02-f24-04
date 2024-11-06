@@ -8,5 +8,5 @@ export default function UCSBOrganizationCreatePage() {
         <h1>Create page not yet implemented</h1>
       </div>
     </BasicLayout>
-  ); 
+  );
 }
