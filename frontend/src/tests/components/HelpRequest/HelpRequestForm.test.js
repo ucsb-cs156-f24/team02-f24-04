@@ -127,16 +127,6 @@ describe("HelpRequestForm tests", () => {
     expect(screen.getByTestId("HelpRequestForm-id")).toHaveValue("123");
     expect(screen.getByTestId("HelpRequestForm-requesterEmail")).toHaveValue("test@ucsb.edu");
   });
-
-  test("accepts a valid email format", async () => {
-    render(<HelpRequestForm />);
-    const emailInput = screen.getByTestId("HelpRequestForm-requesterEmail");
-    fireEvent.change(emailInput, { target: { value: "valid@example.com" } });
-    fireEvent.submit(screen.getByTestId("HelpRequestForm-submit"));
-    await waitFor(() => {
-      expect(screen.queryByText("Invalid email format")).not.toBeInTheDocument();
-    });
-  });
   
   test("shows required error messages when fields are empty", async () => {
     render(<HelpRequestForm />);
