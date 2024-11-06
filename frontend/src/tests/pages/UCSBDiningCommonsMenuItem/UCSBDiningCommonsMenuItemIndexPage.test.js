@@ -106,7 +106,7 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     // assert that the Create button is not present when user isn't an admin
     expect(
-      screen.queryByText(/Create UCSBDiningCommonsMenuItem/),
+      screen.queryByText(/Create UCSB Dining Commons Menu Item/),
     ).not.toBeInTheDocument();
   });
 
