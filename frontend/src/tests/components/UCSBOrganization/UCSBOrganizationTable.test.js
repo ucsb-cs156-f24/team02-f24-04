@@ -6,7 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-import { toast } from "react-toastify";
 
 const mockedNavigate = jest.fn();
 
@@ -260,15 +259,15 @@ describe("UCSBOrganizationTable tests", () => {
     ).toHaveTextContent("False");
 
     const deleteButton = screen.getByTestId(
-        `${testId}-cell-row-0-col-Delete-button`,
-      );
-      expect(deleteButton).toBeInTheDocument();
-  
-      // act - click the delete button
-      fireEvent.click(deleteButton);
-  
-      // assert - check that the delete function was called
-      await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-      expect(axiosMock.history.delete[0].params.orgCode).toBe("kasa");
-    });
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
+    expect(deleteButton).toBeInTheDocument();
+
+    // act - click the delete button
+    fireEvent.click(deleteButton);
+
+    // assert - check that the delete function was called
+    await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
+    expect(axiosMock.history.delete[0].params.orgCode).toBe("kasa");
   });
+});
