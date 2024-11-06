@@ -135,9 +135,17 @@ describe("HelpRequestForm tests", () => {
     
     await waitFor(() => {
       expect(screen.getByText("Requester email is required.")).toBeInTheDocument();
+    });
+    await waitFor(() => {
       expect(screen.getByText("Team ID is required.")).toBeInTheDocument();
+    });
+    await waitFor(() => {
       expect(screen.getByText("Table or Breakout Room is required.")).toBeInTheDocument();
-      expect(screen.getByText("Request time is required.")).toBeInTheDocument();
+    });
+    await waitFor(() => {
+    expect(screen.getByText("Request time is required.")).toBeInTheDocument();
+    });
+    await waitFor(() => {
       expect(screen.getByText("Explanation is required.")).toBeInTheDocument();
     });
   });  
