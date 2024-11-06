@@ -65,10 +65,12 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     // assert
     await waitFor(() => {
-      expect(screen.getByText(/Create UCSBDiningCommonsMenuItem/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Create UCSB Dining Commons Menu Item/),
+      ).toBeInTheDocument();
     });
-    const button = screen.getByText(/Create UCSBDiningCommonsMenuItem/);
-    expect(button).toHaveAttribute("href", "/diningcommonsmenuitem/create");
+    const button = screen.getByText(/Create UCSB Dining Commons Menu Item/);
+    expect(button).toHaveAttribute("href", "/diningcommonsmenuitems/create");
     expect(button).toHaveAttribute("style", "float: right;");
   });
 
@@ -103,7 +105,9 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
     );
 
     // assert that the Create button is not present when user isn't an admin
-    expect(screen.queryByText(/Create UCSBDiningCommonsMenuItem/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/Create UCSBDiningCommonsMenuItem/),
+    ).not.toBeInTheDocument();
   });
 
   test("renders empty table when backend unavailable, user only", async () => {
@@ -179,7 +183,9 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
 
     // assert
     await waitFor(() => {
-      expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem with id 1 was deleted");
+      expect(mockToast).toBeCalledWith(
+        "UCSBDiningCommonsMenuItem with id 1 was deleted",
+      );
     });
   });
 });

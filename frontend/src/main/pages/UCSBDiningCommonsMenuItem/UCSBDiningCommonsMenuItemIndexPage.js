@@ -6,7 +6,6 @@ import { Button } from "react-bootstrap";
 import { useCurrentUser, hasRole } from "main/utils/currentUser";
 
 export default function UCSBDiningCommonsMenuItemIndexPage() {
-  
   const currentUser = useCurrentUser();
 
   const createButton = () => {
@@ -37,9 +36,12 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-      {createButton()}
+        {createButton()}
         <h1>UCSB Dining Commons Menu Item</h1>
-        <UCSBDiningCommonsMenuItemTable menuItems={menuItems} currentUser={currentUser} />
+        <UCSBDiningCommonsMenuItemTable
+          menuItems={menuItems}
+          currentUser={currentUser}
+        />
       </div>
     </BasicLayout>
   );
