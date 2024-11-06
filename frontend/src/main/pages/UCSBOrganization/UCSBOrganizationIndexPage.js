@@ -14,5 +14,5 @@ export default function UCSBOrganizationIndexPage() {
         </p>
       </div>
     </BasicLayout>
-  );
+  ); 
 }

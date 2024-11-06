@@ -20,7 +20,7 @@ describe("UCSBOrganizationIndexPage tests", () => {
     axiosMock
       .onGet("/api/systemInfo")
       .reply(200, systemInfoFixtures.showingNeither);
-  };
+  }; 
 
   const queryClient = new QueryClient();
   test("Renders expected content", async () => {

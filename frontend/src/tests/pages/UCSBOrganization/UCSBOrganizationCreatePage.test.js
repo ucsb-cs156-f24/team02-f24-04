@@ -40,5 +40,5 @@ describe("UCSBOrganizationCreatePage tests", () => {
     // assert
 
     await screen.findByText("Create page not yet implemented");
-  });
+  }); 
 });

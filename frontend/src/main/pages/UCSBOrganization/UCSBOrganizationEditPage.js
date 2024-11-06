@@ -8,5 +8,5 @@ export default function UCSBOrganizationEditPage() {
         <h1>Edit page not yet implemented</h1>
       </div>
     </BasicLayout>
-  );
+  ); 
 }

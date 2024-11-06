@@ -94,5 +94,5 @@ export default function AppNavbar({
         </Container>
       </Navbar>
     </>
-  );
+  ); 
 }
