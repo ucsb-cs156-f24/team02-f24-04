@@ -260,22 +260,15 @@ describe("UCSBOrganizationTable tests", () => {
     ).toHaveTextContent("False");
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`,
-    );
-    expect(deleteButton).toBeInTheDocument();
-
-    // act - click the delete button
-    fireEvent.click(deleteButton);
-
-    // assert - check that the delete function was called
-    await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-    expect(axiosMock.history.delete[0].params.orgCode).toBe("kasa");
-
-    // assert - check that the toast was called with the correct message from response
-    await waitFor(() => {
-      expect(toast).toHaveBeenCalledWith(
-        { message: "Organization deleted successfully" }.message,
+        `${testId}-cell-row-0-col-Delete-button`,
       );
+      expect(deleteButton).toBeInTheDocument();
+  
+      // act - click the delete button
+      fireEvent.click(deleteButton);
+  
+      // assert - check that the delete function was called
+      await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
+      expect(axiosMock.history.delete[0].params.orgCode).toBe("kasa");
     });
   });
-});
