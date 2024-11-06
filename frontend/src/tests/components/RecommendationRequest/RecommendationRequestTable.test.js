@@ -24,7 +24,9 @@ describe("UserTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequests
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -32,23 +34,23 @@ describe("UserTable tests", () => {
     );
 
     const expectedHeaders = [
-        "id",
-        "Requester Email",
-        "Professor Email",
-        "Explanation",
-        "Date Requested",
-        "Date Needed",
-        "Done",
-      ];
-      const expectedFields = [
-        "id",
-        "requesterEmail",
-        "professorEmail",
-        "explanation",
-        "dateRequested",
-        "dateNeeded",
-        "Done",
-      ];
+      "id",
+      "Requester Email",
+      "Professor Email",
+      "Explanation",
+      "Date Requested",
+      "Date Needed",
+      "Done",
+    ];
+    const expectedFields = [
+      "id",
+      "requesterEmail",
+      "professorEmail",
+      "explanation",
+      "dateRequested",
+      "dateNeeded",
+      "Done",
+    ];
 
     const testId = "RecommendationRequestTable";
 
@@ -70,10 +72,9 @@ describe("UserTable tests", () => {
     );
 
     expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-Done`),
-      ).toHaveTextContent("false");
+      screen.getByTestId(`${testId}-cell-row-0-col-Done`),
+    ).toHaveTextContent("false");
 
-    
     const editButton = screen.queryByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
     );
@@ -92,7 +93,9 @@ describe("UserTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequests
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -100,23 +103,23 @@ describe("UserTable tests", () => {
     );
 
     const expectedHeaders = [
-        "id",
-        "Requester Email",
-        "Professor Email",
-        "Explanation",
-        "Date Requested",
-        "Date Needed",
-        "Done",
-      ];
-      const expectedFields = [
-        "id",
-        "requesterEmail",
-        "professorEmail",
-        "explanation",
-        "dateRequested",
-        "dateNeeded",
-        "Done",
-      ];
+      "id",
+      "Requester Email",
+      "Professor Email",
+      "Explanation",
+      "Date Requested",
+      "Date Needed",
+      "Done",
+    ];
+    const expectedFields = [
+      "id",
+      "requesterEmail",
+      "professorEmail",
+      "explanation",
+      "dateRequested",
+      "dateNeeded",
+      "Done",
+    ];
 
     const testId = "RecommendationRequestTable";
 
@@ -138,9 +141,9 @@ describe("UserTable tests", () => {
     );
 
     expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-Done`),
-      ).toHaveTextContent("false");
-    
+      screen.getByTestId(`${testId}-cell-row-0-col-Done`),
+    ).toHaveTextContent("false");
+
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
     );
@@ -161,7 +164,9 @@ describe("UserTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequests
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -182,7 +187,9 @@ describe("UserTable tests", () => {
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/RecommendationRequest/edit/1"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/RecommendationRequest/edit/1",
+      ),
     );
   });
 
@@ -200,7 +207,9 @@ describe("UserTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <RecommendationRequestTable
-            recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests}
+            recommendationRequests={
+              recommendationRequestFixtures.threeRecommendationRequests
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
