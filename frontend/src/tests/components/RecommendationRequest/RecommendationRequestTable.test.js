@@ -1,11 +1,12 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
+import { ucsbDatesFixtures } from "fixtures/ucsbDatesFixtures";
 import RecommendationRequestTable from "main/components/RecommendationRequest/RecommendationRequestTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 
 const mockedNavigate = jest.fn();
 
@@ -14,8 +15,28 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-describe("UserTable tests", () => {
+describe("RecommendationRequestTable tests", () => {
   const queryClient = new QueryClient();
+  const expectedHeaders = [
+    "id",
+    "Requester Email",
+    "Professor Email",
+    "Date Requested",
+    "Date Needed",
+    "Explanation",
+    "Done",
+  ];
+  const expectedFields = [
+    "id",
+    "requesterEmail",
+    "professorEmail",
+    "dateRequested",
+    "dateNeeded",
+    "explanation",
+    "done",
+  ];
+
+  const testId = "RecommendationRequestTable";
 
   test("Has the expected column headers and content for ordinary user", () => {
     const currentUser = currentUserFixtures.userOnly;
@@ -32,27 +53,6 @@ describe("UserTable tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
-
-    const expectedHeaders = [
-      "id",
-      "Requester Email",
-      "Professor Email",
-      "Explanation",
-      "Date Requested",
-      "Date Needed",
-      "Done",
-    ];
-    const expectedFields = [
-      "id",
-      "requesterEmail",
-      "professorEmail",
-      "explanation",
-      "dateRequested",
-      "dateNeeded",
-      "Done",
-    ];
-
-    const testId = "RecommendationRequestTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -72,7 +72,7 @@ describe("UserTable tests", () => {
     );
 
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-Done`),
+      screen.getByTestId(`${testId}-cell-row-0-col-done`),
     ).toHaveTextContent("false");
 
     const editButton = screen.queryByTestId(
@@ -102,27 +102,6 @@ describe("UserTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = [
-      "id",
-      "Requester Email",
-      "Professor Email",
-      "Explanation",
-      "Date Requested",
-      "Date Needed",
-      "Done",
-    ];
-    const expectedFields = [
-      "id",
-      "requesterEmail",
-      "professorEmail",
-      "explanation",
-      "dateRequested",
-      "dateNeeded",
-      "Done",
-    ];
-
-    const testId = "RecommendationRequestTable";
-
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
       expect(header).toBeInTheDocument();
@@ -141,7 +120,7 @@ describe("UserTable tests", () => {
     );
 
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-Done`),
+      screen.getByTestId(`${testId}-cell-row-0-col-done`),
     ).toHaveTextContent("false");
 
     const editButton = screen.getByTestId(
@@ -188,7 +167,7 @@ describe("UserTable tests", () => {
 
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/RecommendationRequest/edit/1",
+        "/recommendationrequest/edit/1",
       ),
     );
   });
@@ -199,8 +178,8 @@ describe("UserTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/RecommendationRequest")
-      .reply(200, { message: "Recommendation Request deleted" });
+      .onDelete("/api/recommendationrequest")
+      .reply(200, { message: "Date deleted" });
 
     // act - render the component
     render(

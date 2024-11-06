@@ -6,7 +6,7 @@ const recommendationRequestFixtures = {
     explanation: "test explanation",
     dateRequested: "2022-1-03T00:00:00",
     dateNeeded: "2022-1-03T00:00:00",
-    done: false,
+    done: "false",
   },
   threeRecommendationRequests: [
     {
@@ -16,7 +16,7 @@ const recommendationRequestFixtures = {
       explanation: "test explanation 1",
       dateRequested: "2022-1-03T00:00:00",
       dateNeeded: "2022-1-03T00:00:00",
-      done: false,
+      done: "false",
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ const recommendationRequestFixtures = {
       explanation: "test explanation 2",
       dateRequested: "2023-1-03T00:00:00",
       dateNeeded: "2023-1-03T00:00:00",
-      done: false,
+      done: "false",
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ const recommendationRequestFixtures = {
       explanation: "test explanation 3",
       dateRequested: "2024-1-03T00:00:00",
       dateNeeded: "2024-1-03T00:00:00",
-      done: false,
+      done: "false",
     },
   ],
 };
