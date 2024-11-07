@@ -160,14 +160,14 @@ describe("HelpRequestTable tests", () => {
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/helpRequests/edit/2"),
+      expect(mockedNavigate).toHaveBeenCalledWith("/helprequest/edit/2"),
     );
   });
 
   test("Delete button calls delete callback", async () => {
     const currentUser = currentUserFixtures.adminUser;
     axiosMock
-      .onDelete("/api/helpRequests", { params: { id: 2 } })
+      .onDelete("/api/helprequest", { params: { id: 2 } })
       .reply(200, { message: "HelpRequest deleted" });
 
     render(
