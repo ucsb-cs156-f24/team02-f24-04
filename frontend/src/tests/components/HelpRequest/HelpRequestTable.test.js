@@ -16,6 +16,17 @@ jest.mock("react-router-dom", () => ({
 
 describe("HelpRequestTable tests", () => {
   const queryClient = new QueryClient();
+  let axiosMock;
+
+  // Set up axios mock adapter before each test and reset mocks after each test
+  beforeEach(() => {
+    axiosMock = new AxiosMockAdapter(axios);
+  });
+
+  afterEach(() => {
+    axiosMock.reset();
+    jest.clearAllMocks();
+  });
 
   const expectedHeaders = ["ID", "Requester Email", "Team ID", "Description"];
   const expectedFields = ["id", "requesterEmail", "teamId", "description"];
@@ -29,7 +40,7 @@ describe("HelpRequestTable tests", () => {
         <MemoryRouter>
           <HelpRequestTable helpRequests={[]} currentUser={currentUser} />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -39,7 +50,7 @@ describe("HelpRequestTable tests", () => {
 
     expectedFields.forEach((field) => {
       const fieldElement = screen.queryByTestId(
-        `${testId}-cell-row-0-col-${field}`,
+        `${testId}-cell-row-0-col-${field}`
       );
       expect(fieldElement).not.toBeInTheDocument();
     });
@@ -56,7 +67,7 @@ describe("HelpRequestTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -70,20 +81,20 @@ describe("HelpRequestTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "2",
+      "2"
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`)
     ).toHaveTextContent("student2@ucsb.edu");
 
     const editButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Edit-button`,
+      `${testId}-cell-row-0-col-Edit-button`
     );
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`,
+      `${testId}-cell-row-0-col-Delete-button`
     );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
@@ -100,7 +111,7 @@ describe("HelpRequestTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     expectedHeaders.forEach((headerText) => {
@@ -114,14 +125,15 @@ describe("HelpRequestTable tests", () => {
     });
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "2",
+      "2"
     );
     expect(
-      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`),
+      screen.getByTestId(`${testId}-cell-row-0-col-requesterEmail`)
     ).toHaveTextContent("student2@ucsb.edu");
 
-    expect(screen.queryByText("Delete")).not.toBeInTheDocument();
-    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    // Verify that "Delete" and "Edit" buttons are not present for ordinary user
+    expect(screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`)).toBeNull();
+    expect(screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`)).toBeNull();
   });
 
   test("Edit button navigates to the edit page", async () => {
@@ -135,22 +147,21 @@ describe("HelpRequestTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     const editButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Edit-button`,
+      `${testId}-cell-row-0-col-Edit-button`
     );
     fireEvent.click(editButton);
 
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/helpRequests/edit/2"),
+      expect(mockedNavigate).toHaveBeenCalledWith("/helpRequests/edit/2")
     );
   });
 
   test("Delete button calls delete callback", async () => {
     const currentUser = currentUserFixtures.adminUser;
-    const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
       .onDelete("/api/helpRequests", { params: { id: 2 } })
       .reply(200, { message: "HelpRequest deleted" });
@@ -163,15 +174,18 @@ describe("HelpRequestTable tests", () => {
             currentUser={currentUser}
           />
         </MemoryRouter>
-      </QueryClientProvider>,
+      </QueryClientProvider>
     );
 
     const deleteButton = screen.getByTestId(
-      `${testId}-cell-row-0-col-Delete-button`,
+      `${testId}-cell-row-0-col-Delete-button`
     );
     fireEvent.click(deleteButton);
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-    expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
+
+    // Check that the delete request sent to axios has the correct parameters
+    const deleteRequest = axiosMock.history.delete[0];
+    expect(deleteRequest.params).toEqual({ id: 2 });
   });
 });
