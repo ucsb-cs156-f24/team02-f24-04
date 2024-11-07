@@ -151,10 +151,8 @@ function RecommendationRequestForm({
       <Row>
         <Col>
           <Form.Group className="mb-3">
-          <Form.Label htmlFor="dateNeeded">
-              Done
-            </Form.Label>
-          <Form.Select
+            <Form.Label htmlFor="dateNeeded">Done</Form.Label>
+            <Form.Select
               data-testid="RecommendationRequestForm-done"
               id="done"
               {...register("done")}

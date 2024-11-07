@@ -74,7 +74,9 @@ describe("RecommendationRequestCreatePage tests", () => {
       done: false,
     };
 
-    axiosMock.onPost("/api/recommendationrequest/post").reply(202, recommendationRequest);
+    axiosMock
+      .onPost("/api/recommendationrequest/post")
+      .reply(202, recommendationRequest);
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -88,18 +90,36 @@ describe("RecommendationRequestCreatePage tests", () => {
         screen.getByTestId("RecommendationRequestForm-requesterEmail"),
       ).toBeInTheDocument();
     });
-    const requesterEmailField = screen.getByTestId("RecommendationRequestForm-requesterEmail");
-    const professorEmailField = screen.getByTestId("RecommendationRequestForm-professorEmail");
-    const explanationField = screen.getByTestId("RecommendationRequestForm-explanation");
-    const dateRequestedField = screen.getByTestId("RecommendationRequestForm-dateRequested");
-    const dateNeededField = screen.getByTestId("RecommendationRequestForm-dateNeeded");
+    const requesterEmailField = screen.getByTestId(
+      "RecommendationRequestForm-requesterEmail",
+    );
+    const professorEmailField = screen.getByTestId(
+      "RecommendationRequestForm-professorEmail",
+    );
+    const explanationField = screen.getByTestId(
+      "RecommendationRequestForm-explanation",
+    );
+    const dateRequestedField = screen.getByTestId(
+      "RecommendationRequestForm-dateRequested",
+    );
+    const dateNeededField = screen.getByTestId(
+      "RecommendationRequestForm-dateNeeded",
+    );
     const doneField = screen.getByTestId("RecommendationRequestForm-done");
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
-    fireEvent.change(requesterEmailField, { target: { value: "test1@gmail.com" } });
-    fireEvent.change(professorEmailField, { target: { value: "test2@gmail.com" } });
+    fireEvent.change(requesterEmailField, {
+      target: { value: "test1@gmail.com" },
+    });
+    fireEvent.change(professorEmailField, {
+      target: { value: "test2@gmail.com" },
+    });
     fireEvent.change(explanationField, { target: { value: "Grad school" } });
-    fireEvent.change(dateRequestedField, { target: { value: "2021-02-02T00:00" } });
-    fireEvent.change(dateNeededField, { target: { value: "2021-02-02T00:00" } });
+    fireEvent.change(dateRequestedField, {
+      target: { value: "2021-02-02T00:00" },
+    });
+    fireEvent.change(dateNeededField, {
+      target: { value: "2021-02-02T00:00" },
+    });
     fireEvent.change(doneField, { target: { value: true } });
 
     expect(submitButton).toBeInTheDocument();

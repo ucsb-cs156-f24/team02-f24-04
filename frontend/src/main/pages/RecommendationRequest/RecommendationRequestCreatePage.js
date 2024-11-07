@@ -19,7 +19,9 @@ export default function RecommendationRequestCreatePage({ storybook = false }) {
   });
 
   const onSuccess = (recommendationRequest) => {
-    toast(`New Recommendation Request Created - id: ${recommendationRequest.id} name: ${recommendationRequest.name}`);
+    toast(
+      `New Recommendation Request Created - id: ${recommendationRequest.id} name: ${recommendationRequest.name}`,
+    );
   };
 
   const mutation = useBackendMutation(
