@@ -1,7 +1,7 @@
 import {
   onDeleteSuccess,
   cellToAxiosParamsDelete,
-} from "main/utils/helpRequestUtils";
+} from "main/utils/HelpRequestUtils";
 import mockConsole from "jest-mock-console";
 
 // Mock the toast function
