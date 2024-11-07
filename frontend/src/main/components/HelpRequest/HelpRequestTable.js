@@ -5,7 +5,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 import {
   cellToAxiosParamsDelete,
   onDeleteSuccess,
-} from "main/utils/helpRequestUtils"; // Make sure to define this in your utils
+} from "main/utils/HelpRequestUtils"; // Make sure to define this in your utils
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
