@@ -11,13 +11,10 @@ import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
 import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
-<<<<<<< HEAD
 import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
 import RecommendationRequestCreatePage from "main/pages/RecommendationRequest/RecommendationRequestCreatePage";
 import RecommendationRequestEditPage from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
 
-=======
->>>>>>> 89b98061cdc028b60e69b7c5ff91a4126ec84334
 import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
 import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
@@ -96,7 +93,6 @@ function App() {
           <>
             <Route
               exact
-<<<<<<< HEAD
               path="/recommendationrequest"
               element={<RecommendationRequestIndexPage />}
             />
@@ -120,8 +116,6 @@ function App() {
           <>
             <Route
               exact
-=======
->>>>>>> 89b98061cdc028b60e69b7c5ff91a4126ec84334
               path="/diningcommonsmenuitems"
               element={<UCSBDiningCommonsMenuItemIndexPage />}
             />
