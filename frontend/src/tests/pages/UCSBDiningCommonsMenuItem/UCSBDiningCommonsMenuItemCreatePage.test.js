@@ -83,7 +83,7 @@ describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
-    
+
     await waitFor(() => {
       expect(
         screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode"),
