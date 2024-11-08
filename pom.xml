@@ -349,6 +349,7 @@
           <timestampedReports>false</timestampedReports>
         </configuration>
       </plugin>
+
       <!-- needed to get JUnit 5 tests to run -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

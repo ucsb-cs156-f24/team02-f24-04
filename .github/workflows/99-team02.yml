@@ -69,6 +69,7 @@ jobs:
           token: ${{ github.token }}
           title: Set up Github Pages
           labels: "setup"
+          labels: "setup"
           body: |
             # Acceptance Criteria:
             - [ ] Github Pages is active, using the `gh-pages` branch and the root directory
@@ -85,6 +86,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Set up Team prod deployment
+          labels: "setup"
           labels: "setup"
           body: |
             # Acceptance Criteria:
@@ -104,6 +106,8 @@ jobs:
                   own Dokku instances for xx).
             - [ ] Everyone on the team, and the instructor and TAs, are all able to 
                   login with OAuth and see that they have admin privileges.
+            - [ ] Everyone on the team, and the instructor and TAs, are all able to 
+                  login with OAuth and see that they have admin privileges.
 
             # Details
 
@@ -114,6 +118,7 @@ jobs:
         with:
           token: ${{ github.token }}
           title: Set up Team qa deployment
+          labels: "setup"
           labels: "setup"
           body: |
             # Acceptance Criteria:
@@ -152,6 +157,7 @@ jobs:
           token: ${{ github.token }}
           title: Adjust title and links in README.md
           labels: "setup"
+          labels: "setup"
           body: |
             ## Acceptance criteria
             - [ ] The title of the README.md file is changed from <tt>STARTER-${{env.ASSIGNMENT}}</tt> to the name of the app (e.g. <tt>${{env.ASSIGNMENT}}-${{env.SAMPLE_TEAM}}</tt>)
@@ -169,7 +175,13 @@ jobs:
           token: ${{ github.token }}
           title:  Submit for Grading
           labels: "setup"
+          labels: "setup"
           body: |
+
+            This issue should be the very *last* one that the team drags into the "done" column;
+            it signifies that the sprint is complete, and that the project is ready for the
+            staff to review it for a grade.
+
 
             This issue should be the very *last* one that the team drags into the "done" column;
             it signifies that the sprint is complete, and that the project is ready for the
