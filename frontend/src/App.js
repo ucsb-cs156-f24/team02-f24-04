@@ -132,6 +132,7 @@ function App() {
               exact
               path="/diningcommonsmenuitems/create"
               element={<UCSBDiningCommonsMenuItemCreatePage />}
+            />
           </>
         )}
         {hasRole(currentUser, "ROLE_USER") && (
