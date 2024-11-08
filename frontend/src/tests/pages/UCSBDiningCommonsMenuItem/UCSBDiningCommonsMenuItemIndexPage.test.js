@@ -23,9 +23,7 @@ jest.mock("react-toastify", () => {
 describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
-
   const testId = "UCSBDiningCommonsMenuItemTable";
-
 
   const setupUserOnly = () => {
     axiosMock.reset();
