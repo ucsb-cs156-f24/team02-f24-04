@@ -36,7 +36,7 @@ function RecommendationRequestForm({
             <Form.Group className="mb-3">
               <Form.Label htmlFor="id">Id</Form.Label>
               <Form.Control
-                data-testid="RecommendationRequest-id"
+                data-testid="RecommendationRequestForm-id"
                 id="id"
                 type="text"
                 {...register("id")}

@@ -37,9 +37,9 @@ describe("RecommendationRequest tests", () => {
         />
       </Router>,
     );
-    await screen.findByTestId(/RecommendationRequest-id/);
+    await screen.findByTestId(/RecommendationRequestForm-id/);
     expect(screen.getByText(/Id/)).toBeInTheDocument();
-    expect(screen.getByTestId(/RecommendationRequest-id/)).toHaveValue("1");
+    expect(screen.getByTestId(/RecommendationRequestForm-id/)).toHaveValue("1");
   });
 
   test("Correct Error messsages on bad input", async () => {
