@@ -27,7 +27,7 @@ Default.parameters = {
       });
     }),
     http.get("/api/ucsborganizations", () => {
-      return HttpResponse.json(ucsbOrganizationFixtures.oneOrganization, {
+      return HttpResponse.json(ucsbOrganizationFixtures.oneOrg, {
         status: 200,
       });
     }),
