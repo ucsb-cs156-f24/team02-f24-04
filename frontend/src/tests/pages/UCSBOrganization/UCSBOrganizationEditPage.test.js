@@ -5,7 +5,6 @@ import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizati
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 
@@ -141,7 +140,7 @@ describe("UCSBOrganizationEditPage tests", () => {
       expect(orgTranslationField).toHaveValue(
         "UCSB Korean American Student Association",
       );
-      expect(inactiveField).toHaveValue("false"); // dropdown value for inactive status
+      expect(inactiveField).toHaveValue("false");
       expect(submitButton).toBeInTheDocument();
     });
 

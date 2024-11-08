@@ -19,9 +19,7 @@ export default function UCSBOrganizationEditPage({ storybook = false }) {
       // Stryker disable next-line all : GET is the default, so changing this to "" doesn't introduce a bug
       method: "GET",
       url: `/api/ucsborganizations`,
-      params: { 
-        orgCode: id 
-      }, // Ensure orgCode is passed here in params
+      params: { orgCode: id }, // Ensure orgCode is passed here in params
     },
   );
 

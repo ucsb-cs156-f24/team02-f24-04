@@ -1,13 +1,13 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBOrganizationEditPage from "main/pages/UCSBOrganizations/UCSBOrganizationEditPage";
-import { ucsbOrganizationFixtures } from "fixtures/ucsbOrganizationFixtures.js";
+import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
 
 export default {
-  title: "pages/UCSBOrganizations/UCSBOrganizationEditPage",
+  title: "pages/UCSBOrganization/UCSBOrganizationEditPage",
   component: UCSBOrganizationEditPage,
 };
 
@@ -32,10 +32,6 @@ Default.parameters = {
       });
     }),
     http.put("/api/ucsborganizations", () => {
-      return HttpResponse.json({}, { status: 200 });
-    }),
-    http.put("/api/ucsborganizations", (req) => {
-      window.alert("PUT: " + req.url + " and body: " + req.body);
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
