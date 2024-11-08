@@ -8,7 +8,8 @@ export default function HelpRequestCreatePage({ storybook = false }) {
   const objectToAxiosParams = (helpRequest) => ({
     url: "/api/helprequest/post", // Ensure this matches the POST endpoint in Swagger
     method: "POST",
-    data: { // Use 'data' instead of 'params'
+    data: {
+      // Use 'data' instead of 'params'
       requesterEmail: helpRequest.requesterEmail,
       teamId: helpRequest.teamId,
       tableOrBreakoutRoom: helpRequest.tableOrBreakoutRoom, // Add missing fields
@@ -28,7 +29,7 @@ export default function HelpRequestCreatePage({ storybook = false }) {
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : tough
-    ["/api/helprequest/all"] // Update cache for the HelpRequest listing endpoint
+    ["/api/helprequest/all"], // Update cache for the HelpRequest listing endpoint
   );
 
   const { isSuccess } = mutation;
@@ -38,7 +39,7 @@ export default function HelpRequestCreatePage({ storybook = false }) {
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/helprequest"/>; // Corrected redirect path
+    return <Navigate to="/helprequest" />; // Corrected redirect path
   }
 
   return (

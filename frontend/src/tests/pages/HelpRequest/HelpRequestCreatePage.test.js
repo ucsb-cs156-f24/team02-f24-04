@@ -37,8 +37,12 @@ describe("HelpRequestCreatePage tests", () => {
     jest.clearAllMocks();
     axiosMock.reset();
     axiosMock.resetHistory();
-    axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
-    axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+    axiosMock
+      .onGet("/api/currentUser")
+      .reply(200, apiCurrentUserFixtures.userOnly);
+    axiosMock
+      .onGet("/api/systemInfo")
+      .reply(200, systemInfoFixtures.showingNeither);
   });
 
   const queryClient = new QueryClient();
@@ -49,7 +53,7 @@ describe("HelpRequestCreatePage tests", () => {
         <MemoryRouter>
           <HelpRequestCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
@@ -75,7 +79,7 @@ describe("HelpRequestCreatePage tests", () => {
         <MemoryRouter>
           <HelpRequestCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
@@ -93,8 +97,12 @@ describe("HelpRequestCreatePage tests", () => {
     fireEvent.change(emailInput, { target: { value: "testuser@ucsb.edu" } });
     fireEvent.change(teamIdInput, { target: { value: "team123" } });
     fireEvent.change(tableInput, { target: { value: "Table 1" } });
-    fireEvent.change(requestTimeInput, { target: { value: "2023-01-01T12:00" } });
-    fireEvent.change(explanationInput, { target: { value: "Need help with project setup" } });
+    fireEvent.change(requestTimeInput, {
+      target: { value: "2023-01-01T12:00" },
+    });
+    fireEvent.change(explanationInput, {
+      target: { value: "Need help with project setup" },
+    });
     fireEvent.click(solvedCheckbox);
     fireEvent.click(createButton);
 
@@ -113,7 +121,7 @@ describe("HelpRequestCreatePage tests", () => {
 
     // Check that the toast was called with the expected message
     expect(mockToast).toBeCalledWith(
-      "New Help Request Created - id: 3 requesterEmail: testuser@ucsb.edu"
+      "New Help Request Created - id: 3 requesterEmail: testuser@ucsb.edu",
     );
 
     // Check that navigation was triggered to /helprequest

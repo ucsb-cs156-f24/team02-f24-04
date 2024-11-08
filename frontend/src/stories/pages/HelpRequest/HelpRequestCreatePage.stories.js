@@ -26,12 +26,15 @@ Default.parameters = {
       });
     }),
     http.post("/api/helprequest/post", (req) => {
-      return HttpResponse.json({
-        id: 1,
-        requesterEmail: req.params.requesterEmail,
-        teamId: req.params.teamId,
-        explanation: req.params.explanation,
-      }, { status: 200 });
+      return HttpResponse.json(
+        {
+          id: 1,
+          requesterEmail: req.params.requesterEmail,
+          teamId: req.params.teamId,
+          explanation: req.params.explanation,
+        },
+        { status: 200 },
+      );
     }),
   ],
 };
