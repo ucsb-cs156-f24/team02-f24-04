@@ -20,7 +20,7 @@ const ucsbOrganizationFixtures = {
       orgCode: "tasa",
       orgTranslationShort: "TASA",
       orgTranslation: "UCSB Taiwanese American Student Association",
-      inactive: false,
+      inactive: true,
     },
 
     {
