@@ -55,7 +55,7 @@ describe("HelpRequestIndexPage tests", () => {
         <MemoryRouter>
           <HelpRequestIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
@@ -78,27 +78,31 @@ describe("HelpRequestIndexPage tests", () => {
         <MemoryRouter>
           <HelpRequestIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
       expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-id`)
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
       ).toHaveTextContent("2");
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("4");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "3",
+    );
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
+      "4",
+    );
 
     const createHelpRequestButton = screen.queryByText("Create Help Request");
     expect(createHelpRequestButton).not.toBeInTheDocument();
 
     // Verifying absence of admin buttons for regular user
     expect(
-      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Delete-button")
+      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Delete-button"),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Edit-button")
+      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Edit-button"),
     ).not.toBeInTheDocument();
   });
 
@@ -113,7 +117,7 @@ describe("HelpRequestIndexPage tests", () => {
         <MemoryRouter>
           <HelpRequestIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
@@ -122,46 +126,56 @@ describe("HelpRequestIndexPage tests", () => {
 
     const errorMessage = console.error.mock.calls[0][0];
     expect(errorMessage).toMatch(
-      "Error communicating with backend via GET on /api/helprequest/all"
+      "Error communicating with backend via GET on /api/helprequest/all",
     );
     restoreConsole();
   });
 
   test("what happens when you click delete, admin", async () => {
     setupAdminUser();
-  
+
     axiosMock
       .onGet("/api/helprequest/all")
       .reply(200, helpRequestFixtures.threeHelpRequests);
     axiosMock
       .onDelete("/api/helprequest")
       .reply(200, { message: "HelpRequest with id 1 was deleted" });
-  
+
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <HelpRequestIndexPage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
-  
+
     await waitFor(() => {
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
+      ).toHaveTextContent("2");
     });
-  
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
     expect(deleteButton).toBeInTheDocument();
-  
+
     fireEvent.click(deleteButton);
-  
+
     await waitFor(() => {
-      expect(mockToast).toBeCalledWith({ message: "HelpRequest with id 1 was deleted" });
+      expect(mockToast).toBeCalledWith({
+        message: "HelpRequest with id 1 was deleted",
+      });
     });
-  
+
     // Ensure only two rows remain after deletion
     await waitFor(() => {
-      expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("2");
-      expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("3");
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
+      ).toHaveTextContent("2");
+      expect(
+        screen.getByTestId(`${testId}-cell-row-1-col-id`),
+      ).toHaveTextContent("3");
     });
-  });  
+  });
 });
