@@ -134,9 +134,7 @@ describe("UCSBOrganizationEditPage tests", () => {
       const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
       expect(orgCodeField).toHaveValue("kasa");
-      expect(orgTranslationShortField).toHaveValue(
-        "KASA",
-      );
+      expect(orgTranslationShortField).toHaveValue("KASA");
       expect(orgTranslationField).toHaveValue(
         "UCSB Korean American Student Association",
       );
