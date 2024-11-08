@@ -2,47 +2,52 @@ import {
   onDeleteSuccess,
   cellToAxiosParamsDelete,
 } from "main/utils/UCSBOrganizationUtils";
-import { toast } from "react-toastify";
+import mockConsole from "jest-mock-console";
 
-jest.mock("react-toastify", () => ({
-  toast: jest.fn(),
-}));
+const mockToast = jest.fn();
+jest.mock("react-toastify", () => {
+  const originalModule = jest.requireActual("react-toastify");
+  return {
+    __esModule: true,
+    ...originalModule,
+    toast: (x) => mockToast(x),
+  };
+});
 
-describe("UCSBOrganizationUtils tests", () => {
+describe("UCSBOrganizationUtils", () => {
   describe("onDeleteSuccess", () => {
-    test("calls toast with the correct message", () => {
-      // Arrange
-      const message = "Organization deleted successfully";
+    test("It puts the message on console.log and in a toast", () => {
+      // arrange
+      const restoreConsole = mockConsole();
 
-      // Act
-      onDeleteSuccess(message);
+      // act
+      onDeleteSuccess("Organization deleted successfully");
 
-      // Assert
-      expect(toast).toHaveBeenCalledWith(message);
+      // assert
+      expect(mockToast).toHaveBeenCalledWith(
+        "Organization deleted successfully",
+      );
+      expect(console.log).toHaveBeenCalled();
+      const message = console.log.mock.calls[0][0];
+      expect(message).toMatch("Organization deleted successfully");
+
+      restoreConsole();
     });
   });
 
   describe("cellToAxiosParamsDelete", () => {
-    test("returns the correct axios params object", () => {
-      // Arrange
-      const cell = {
-        row: {
-          values: {
-            orgCode: "csu",
-          },
-        },
-      };
+    test("It returns the correct params", () => {
+      // arrange
+      const cell = { row: { values: { orgCode: "csu" } } };
 
-      // Act
+      // act
       const result = cellToAxiosParamsDelete(cell);
 
-      // Assert
+      // assert
       expect(result).toEqual({
         url: "/api/ucsborganizations",
         method: "DELETE",
-        params: {
-          orgCode: "csu",
-        },
+        params: { orgCode: "csu" },
       });
     });
   });
