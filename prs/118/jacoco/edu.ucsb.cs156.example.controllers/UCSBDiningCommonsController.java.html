@@ -102,6 +102,8 @@ import jakarta.validation.Valid;
 <span class="fc" id="L102">        return savedCommons;</span>
     }
 
+
+
     /**
      * Delete a diningcommons. Accessible only to users with the role &quot;ROLE_ADMIN&quot;.
      * @param code code of the commons
@@ -112,11 +114,11 @@ import jakarta.validation.Valid;
     @DeleteMapping(&quot;&quot;)
     public Object deleteCommons(
             @Parameter(name=&quot;code&quot;) @RequestParam String code) {
-<span class="fc" id="L115">        UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)</span>
-<span class="fc" id="L116">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommons.class, code));</span>
+<span class="fc" id="L117">        UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)</span>
+<span class="fc" id="L118">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommons.class, code));</span>
 
-<span class="fc" id="L118">        ucsbDiningCommonsRepository.delete(commons);</span>
-<span class="fc" id="L119">        return genericMessage(&quot;UCSBDiningCommons with id %s deleted&quot;.formatted(code));</span>
+<span class="fc" id="L120">        ucsbDiningCommonsRepository.delete(commons);</span>
+<span class="fc" id="L121">        return genericMessage(&quot;UCSBDiningCommons with id %s deleted&quot;.formatted(code));</span>
     }
 
     /**
@@ -132,20 +134,20 @@ import jakarta.validation.Valid;
             @Parameter(name=&quot;code&quot;) @RequestParam String code,
             @RequestBody @Valid UCSBDiningCommons incoming) {
 
-<span class="fc" id="L135">        UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)</span>
-<span class="fc" id="L136">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommons.class, code));</span>
+<span class="fc" id="L137">        UCSBDiningCommons commons = ucsbDiningCommonsRepository.findById(code)</span>
+<span class="fc" id="L138">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommons.class, code));</span>
 
 
-<span class="fc" id="L139">        commons.setName(incoming.getName());  </span>
-<span class="fc" id="L140">        commons.setHasSackMeal(incoming.getHasSackMeal());</span>
-<span class="fc" id="L141">        commons.setHasTakeOutMeal(incoming.getHasTakeOutMeal());</span>
-<span class="fc" id="L142">        commons.setHasDiningCam(incoming.getHasDiningCam());</span>
-<span class="fc" id="L143">        commons.setLatitude(incoming.getLatitude());</span>
-<span class="fc" id="L144">        commons.setLongitude(incoming.getLongitude());</span>
+<span class="fc" id="L141">        commons.setName(incoming.getName());  </span>
+<span class="fc" id="L142">        commons.setHasSackMeal(incoming.getHasSackMeal());</span>
+<span class="fc" id="L143">        commons.setHasTakeOutMeal(incoming.getHasTakeOutMeal());</span>
+<span class="fc" id="L144">        commons.setHasDiningCam(incoming.getHasDiningCam());</span>
+<span class="fc" id="L145">        commons.setLatitude(incoming.getLatitude());</span>
+<span class="fc" id="L146">        commons.setLongitude(incoming.getLongitude());</span>
 
-<span class="fc" id="L146">        ucsbDiningCommonsRepository.save(commons);</span>
+<span class="fc" id="L148">        ucsbDiningCommonsRepository.save(commons);</span>
 
-<span class="fc" id="L148">        return commons;</span>
+<span class="fc" id="L150">        return commons;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
