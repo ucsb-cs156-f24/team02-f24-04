@@ -216,7 +216,7 @@ describe("RecommendationRequestEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Recommendation Request Updated - id: 17 name: undefined",
+        "Recommendation Request Updated - id: 17",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/recommendationrequest" });
 

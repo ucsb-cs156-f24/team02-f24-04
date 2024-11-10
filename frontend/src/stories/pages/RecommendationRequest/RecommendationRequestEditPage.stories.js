@@ -28,7 +28,7 @@ Default.parameters = {
     }),
     http.get("/api/recommendationrequest", () => {
       return HttpResponse.json(
-        recommendationRequestFixtures.recommendationRequestFixtures[0],
+        recommendationRequestFixtures.threeRecommendationRequests[0],
         {
           status: 200,
         },
