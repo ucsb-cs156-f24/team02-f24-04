@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 export default function UCSBDiningCommonsMenuItemCreatePage({
   storybook = false,
 }) {
-  // Stryker disable all : UCSBDiningCommonsMenuItem for future implementation
   const objectToAxiosParams = (menuItem) => ({
     url: "/api/ucsbdiningcommonsmenuitem/post",
     method: "POST",
