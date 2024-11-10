@@ -1,4 +1,4 @@
-# STARTER-team02
+# team02-f24-04
 
 Instructions: <https://ucsb-cs156.github.io/f24/lab/team02.html>
 
