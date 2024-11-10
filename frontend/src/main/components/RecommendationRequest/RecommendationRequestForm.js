@@ -151,11 +151,18 @@ function RecommendationRequestForm({
       <Row>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="done">Done</Form.Label>
-            <Form.Select data-testid="RecommendationRequestForm-done" id="done">
+            <Form.Label htmlFor="dateNeeded">Done</Form.Label>
+            <Form.Select
+              data-testid="RecommendationRequestForm-done"
+              id="done"
+              {...register("done")}
+            >
               <option value="true">True</option>
               <option value="false">False</option>
             </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              {errors.done?.message}
+            </Form.Control.Feedback>
           </Form.Group>
         </Col>
       </Row>
