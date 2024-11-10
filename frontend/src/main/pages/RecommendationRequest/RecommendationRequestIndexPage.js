@@ -1,11 +1,12 @@
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 import React from "react";
 import { useBackend } from "main/utils/useBackend";
-import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
+
+import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import RecommendationRequestTable from "main/components/RecommendationRequest/RecommendationRequestTable";
 import { Button } from "react-bootstrap";
 import { useCurrentUser, hasRole } from "main/utils/currentUser";
 
-export default function UCSBDiningCommonsMenuItemIndexPage() {
+export default function RecommendationRequestIndexPage() {
   const currentUser = useCurrentUser();
 
   const createButton = () => {
@@ -13,23 +14,23 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
       return (
         <Button
           variant="primary"
-          href="/diningcommonsmenuitems/create"
+          href="/recommendationrequest/create"
           style={{ float: "right" }}
         >
-          Create UCSB Dining Commons Menu Item
+          Create Recommendation Request
         </Button>
       );
     }
   };
 
   const {
-    data: menuItems,
+    data: recommendationRequests,
     error: _error,
     status: _status,
   } = useBackend(
     // Stryker disable next-line all : don't test internal caching of React Query
-    ["/api/ucsbdiningcommonsmenuitem/all"],
-    { method: "GET", url: "/api/ucsbdiningcommonsmenuitem/all" },
+    ["/api/recommendationrequest/all"],
+    { method: "GET", url: "/api/recommendationrequest/all" },
     [],
   );
 
@@ -37,9 +38,9 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
     <BasicLayout>
       <div className="pt-2">
         {createButton()}
-        <h1>UCSB Dining Commons Menu Item</h1>
-        <UCSBDiningCommonsMenuItemTable
-          menuItems={menuItems}
+        <h1>RecommendationRequests</h1>
+        <RecommendationRequestTable
+          recommendationRequests={recommendationRequests}
           currentUser={currentUser}
         />
       </div>

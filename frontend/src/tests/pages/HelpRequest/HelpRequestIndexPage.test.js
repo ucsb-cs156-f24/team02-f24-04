@@ -1,14 +1,13 @@
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemIndexPage";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-
+import mockConsole from "jest-mock-console";
+import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-import mockConsole from "jest-mock-console";
 
 const mockToast = jest.fn();
 jest.mock("react-toastify", () => {
@@ -20,10 +19,10 @@ jest.mock("react-toastify", () => {
   };
 });
 
-describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
+describe("HelpRequestIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
-
-  const testId = "UCSBDiningCommonsMenuItemTable";
+  const testId = "HelpRequestTable";
+  const queryClient = new QueryClient();
 
   const setupUserOnly = () => {
     axiosMock.reset();
@@ -48,144 +47,137 @@ describe("UCSBDiningCommonsMenuItemIndexPage tests", () => {
   };
 
   test("Renders with Create Button for admin user", async () => {
-    // arrange
-
     setupAdminUser();
-    const queryClient = new QueryClient();
-    axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").reply(200, []);
-    // act
+    axiosMock.onGet("/api/helprequest/all").reply(200, []);
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemIndexPage />
+          <HelpRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
-    // assert
     await waitFor(() => {
-      expect(
-        screen.getByText(/Create UCSB Dining Commons Menu Item/),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Create Help Request/)).toBeInTheDocument();
     });
-    const button = screen.getByText(/Create UCSB Dining Commons Menu Item/);
-    expect(button).toHaveAttribute("href", "/diningcommonsmenuitems/create");
-    expect(button).toHaveAttribute("style", "float: right;");
+
+    const button = screen.getByText(/Create Help Request/);
+    expect(button).toHaveAttribute("href", "/helprequest/create");
+    expect(button).toHaveStyle("float: right;");
   });
 
-  test("renders three menu items correctly for regular user", async () => {
-    // arrange
+  test("renders three help requests correctly for regular user", async () => {
     setupUserOnly();
-    const queryClient = new QueryClient();
     axiosMock
-      .onGet("/api/ucsbdiningcommonsmenuitem/all")
-      .reply(200, ucsbDiningCommonsMenuItemFixtures.threeDiningCommonMenuItems);
+      .onGet("/api/helprequest/all")
+      .reply(200, helpRequestFixtures.threeHelpRequests);
 
-    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemIndexPage />
+          <HelpRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
-    // assert
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
-      ).toHaveTextContent("1");
+      ).toHaveTextContent("2");
     });
+
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      "2",
-    );
-    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
       "3",
     );
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
+      "4",
+    );
 
-    // assert that the Create button is not present when user isn't an admin
+    const createHelpRequestButton = screen.queryByText("Create Help Request");
+    expect(createHelpRequestButton).not.toBeInTheDocument();
+
+    // Verifying absence of admin buttons for regular user
     expect(
-      screen.queryByText(/Create UCSB Dining Commons Menu Item/),
+      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Delete-button"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByTestId("HelpRequestTable-cell-row-0-col-Edit-button"),
     ).not.toBeInTheDocument();
   });
 
   test("renders empty table when backend unavailable, user only", async () => {
-    // arrange
     setupUserOnly();
-    const queryClient = new QueryClient();
-    axiosMock.onGet("/api/ucsbdiningcommonsmenuitem/all").timeout();
+    axiosMock.onGet("/api/helprequest/all").timeout();
+
     const restoreConsole = mockConsole();
 
-    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemIndexPage />
+          <HelpRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
-    // assert
     await waitFor(() => {
       expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
     });
 
     const errorMessage = console.error.mock.calls[0][0];
     expect(errorMessage).toMatch(
-      "Error communicating with backend via GET on /api/ucsbdiningcommonsmenuitem/all",
+      "Error communicating with backend via GET on /api/helprequest/all",
     );
     restoreConsole();
-
-    expect(
-      screen.queryByTestId(`${testId}-cell-row-0-col-id`),
-    ).not.toBeInTheDocument();
   });
 
   test("what happens when you click delete, admin", async () => {
-    // arrange
     setupAdminUser();
-    const queryClient = new QueryClient();
-    axiosMock
-      .onGet("/api/ucsbdiningcommonsmenuitem/all")
-      .reply(200, ucsbDiningCommonsMenuItemFixtures.threeDiningCommonMenuItems);
-    axiosMock
-      .onDelete("/api/ucsbdiningcommonsmenuitem")
-      .reply(200, "UCSBDiningCommonsMenuItem with id 1 was deleted");
 
-    // act
+    axiosMock
+      .onGet("/api/helprequest/all")
+      .reply(200, helpRequestFixtures.threeHelpRequests);
+    axiosMock
+      .onDelete("/api/helprequest")
+      .reply(200, { message: "HelpRequest with id 1 was deleted" });
+
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemIndexPage />
+          <HelpRequestIndexPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
-    // assert
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
-      ).toBeInTheDocument();
+      ).toHaveTextContent("2");
     });
-
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "1",
-    );
 
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
     );
     expect(deleteButton).toBeInTheDocument();
 
-    // act
     fireEvent.click(deleteButton);
 
-    // assert
     await waitFor(() => {
-      expect(mockToast).toBeCalledWith(
-        "UCSBDiningCommonsMenuItem with id 1 was deleted",
-      );
+      expect(mockToast).toBeCalledWith({
+        message: "HelpRequest with id 1 was deleted",
+      });
+    });
+
+    // Ensure only two rows remain after deletion
+    await waitFor(() => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
+      ).toHaveTextContent("2");
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-1-col-id`),
+      ).toHaveTextContent("3");
     });
   });
 });
