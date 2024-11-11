@@ -38,7 +38,7 @@ describe("UCSBOrganizationUtils tests", () => {
 
       // Assert
       expect(result).toEqual({
-        url: "/api/organizations",
+        url: "/api/ucsborganizations",
         method: "DELETE",
         params: {
           orgCode: "csu",
