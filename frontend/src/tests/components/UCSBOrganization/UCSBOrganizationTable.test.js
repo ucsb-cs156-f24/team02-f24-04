@@ -14,10 +14,6 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedNavigate,
 }));
 
-jest.mock("react-toastify", () => ({
-  toast: jest.fn(),
-}));
-
 describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
 
@@ -219,7 +215,9 @@ describe("UCSBOrganizationTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/organizations/edit/kasa"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/ucsborganization/edit/kasa",
+      ),
     );
   });
 
@@ -229,7 +227,7 @@ describe("UCSBOrganizationTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/organizations")
+      .onDelete("/api/ucsborganizations")
       .reply(200, { message: "Organization deleted successfully" });
 
     // act - render the component
