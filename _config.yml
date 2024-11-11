@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f24/team02-f24-04
 owner: ucsb-cs156-f24
 repo_name: team02-f24-04
-pull_requests: [{"author":{"id":"MDQ6VXNlcjU5MzgzNTk1","is_bot":false,"login":"alvinwang1","name":"Alvin Wang"},"headRefName":"Alvin-RecommendationRequest-tests","number":131,"title":"Alvin - Recommendation Request - E2E Tests","url":"https://github.com/ucsb-cs156-f24/team02-f24-04/pull/131"}]
+pull_requests: [{"author":{"id":"U_kgDOB_ueCQ","is_bot":false,"login":"nilay-kundu","name":"Nilay Kundu"},"headRefName":"nk-MenuItemReview-tests","number":132,"title":"MenuItemReview E2E Test","url":"https://github.com/ucsb-cs156-f24/team02-f24-04/pull/132"},{"author":{"id":"MDQ6VXNlcjU5MzgzNTk1","is_bot":false,"login":"alvinwang1","name":"Alvin Wang"},"headRefName":"Alvin-RecommendationRequest-tests","number":131,"title":"Alvin - Recommendation Request - E2E Tests","url":"https://github.com/ucsb-cs156-f24/team02-f24-04/pull/131"}]
