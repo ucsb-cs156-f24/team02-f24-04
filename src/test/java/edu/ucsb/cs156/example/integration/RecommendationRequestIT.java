@@ -61,12 +61,13 @@ public class RecommendationRequestIT {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void an_admin_user_can_post_a_new_restaurant() throws Exception {
+        public void an_admin_user_can_post_a_new_recommendationrequest() throws Exception {
                 // arrange
 
                  LocalDateTime ldt = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 RecommendationRequest recommendationRequest1 = RecommendationRequest.builder()
+                                .id(1)
                                 .requesterEmail("cgaucho@ucsb.edu")
                                 .professorEmail("phtcon@ucsb.edu")
                                 .explanation("BS/MSprogram")
