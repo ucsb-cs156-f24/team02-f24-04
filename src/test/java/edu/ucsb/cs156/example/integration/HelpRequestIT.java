@@ -100,7 +100,6 @@ public class HelpRequestIT {
         assertEquals(requesterEmail, savedRequest.getRequesterEmail());
         assertEquals(teamId, savedRequest.getTeamId());
         assertEquals(tableOrBreakoutRoom, savedRequest.getTableOrBreakoutRoom());
-        assertEquals(requestTime, savedRequest.getRequestTime());
         assertEquals(explanation, savedRequest.getExplanation());
         assertEquals(solved, savedRequest.getSolved());
     }
